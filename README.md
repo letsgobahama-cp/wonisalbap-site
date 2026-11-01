@@ -5,11 +5,23 @@
 - `js/main.js` 는 `<head>` 에서 `defer` 없이 읽습니다. 파일 첫 줄이 `<html>` 에 `js` 표시를 붙여 첫 화면부터 페이드업이 깜빡임 없이 시작되고,
   파일을 못 받거나 초기화에 실패하면 표시가 붙지 않아(또는 떼어져) 모든 콘텐츠와 JS 없는 메뉴 링크가 그대로 보입니다.
 
-## 1. 올리는 법
-- `site/` 폴더 **안의 내용 전체**를 서브도메인(`icheon.wanteat.co.kr`) 웹 루트에 그대로 업로드합니다.
-  (`index.html`, `favicon.ico`, `robots.txt`, `sitemap.xml`, `llms.txt`, `css/`, `js/`, `assets/`)
+## 1. 올리는 법 (GitHub Pages · 무료)
+사이트는 **GitHub Pages** 에서 서비스됩니다. 별도 호스팅 비용은 없습니다.
+- 저장소: https://github.com/letsgobahama-cp/wonisalbap-site (공개 저장소, `main` 브랜치 루트 = 이 `site/` 폴더)
+- 주소: https://icheon.wanteat.co.kr (hosting.kr 의 `wanteat.co.kr` DNS에 `icheon` CNAME → `letsgobahama-cp.github.io`, HTTPS 강제)
+- `CNAME`·`.nojekyll` 파일은 **지우지 않습니다**(지우면 주소 연결이 풀립니다).
+- 이 폴더에는 `site/` 내용만 둡니다. `store-info.md`·`references/` 등 개인정보가 섞인 파일은 올리지 않습니다.
+
+수정 후 올리기 (이 폴더에서):
+```
+git add -A
+git commit -m "수정 내용"
+git push
+```
+보통 1~2분 안에 반영됩니다. 상태 확인: `gh api repos/letsgobahama-cp/wonisalbap-site/pages/builds --jq '.[0].status'` (`built` 면 완료)
+
 - 로컬 확인: `site/` 에서 `python -m http.server 8000` → http://localhost:8000
-- 도메인이 바뀌면 `index.html` 의 canonical · og:url · og:image · JSON-LD image 주소를 함께 바꿉니다.
+- 도메인이 바뀌면 `CNAME` 파일과 `index.html` 의 canonical · og:url · og:image · JSON-LD image 주소를 함께 바꿉니다.
 
 ## 2. 자리 비움 6곳 교체 위치 (+ 지도)
 `index.html` 에서 **`[자리 비움]`** 으로 검색하면 주석 바로 아래가 교체할 자리입니다. 자리 비움은 표의 1~5번과 (+)사업자정보 여섯 곳이고, 6번 지도는 이미 구글 지도가 들어 있어 바꿀 때만 5장을 따릅니다.
